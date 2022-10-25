@@ -8,11 +8,11 @@
 		<version>2.7.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.expensemanager</groupId>
-	<artifactId>ExpenseManager</artifactId>
-	<version>1.0.0</version>
-	<name>ExpenseManager</name>
-	<description>ExpenseManager</description>
+	<groupId>com.category</groupId>
+	<artifactId>Category</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>Category</name>
+	<description>Category Module</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
