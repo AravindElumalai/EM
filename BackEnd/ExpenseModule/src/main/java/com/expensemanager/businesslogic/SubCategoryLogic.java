@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.expensemanager.Constant.SubCategoryConstant;
 import com.expensemanager.abstractlayer.SubCategoryAbstract;
@@ -20,6 +21,7 @@ import com.expensemanager.dto.SubCategoryResponseDTO;
 import com.expensemanager.repository.CategoryRepository;
 import com.expensemanager.repository.SubCategoryRepository;
 
+@Service
 public class SubCategoryLogic implements SubCategoryAbstract {
 
     private Logger logger = LoggerFactory.getLogger(SubCategoryLogic.class);

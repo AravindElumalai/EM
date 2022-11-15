@@ -12,11 +12,13 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "sub_category_table")
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class SubCategory {
 
