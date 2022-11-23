@@ -1,7 +1,6 @@
 package com.expensemanager.controller;
 
 import java.util.List;
-import java.util.Objects;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,11 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.expensemanager.abstractlayer.CategoryAbstract;
-import com.expensemanager.customexception.CategoryExpection;
 import com.expensemanager.dto.CategoryRequestDTO;
 import com.expensemanager.dto.CategoryResponseDTO;
 
@@ -38,7 +35,7 @@ public class CategoryController {
         logger.info(" :::Create Category Controller addCategory::: ");
 
         CategoryResponseDTO response = categoryService.createCategory(categoryDto);
-        if (response != null && Objects.nonNull(response)) {
+        if (response != null) {
             return new ResponseEntity<>(response, HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -51,7 +48,7 @@ public class CategoryController {
         logger.info(" ::: Category Controller showAllCategory::: ");
 
         List<CategoryResponseDTO> response = categoryService.getAllCategory();
-        if (response != null && Objects.nonNull(response)) {
+        if (response != null) {
             return new ResponseEntity<>(response, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -64,7 +61,7 @@ public class CategoryController {
         logger.info(" ::: Category Controller getParticularCategory::: ");
 
         CategoryResponseDTO response = categoryService.getCategory(categoryId);
-        if (response != null && Objects.nonNull(response)) {
+        if (response != null) {
             return new ResponseEntity<>(response, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -77,7 +74,7 @@ public class CategoryController {
         logger.info(" ::: Category Controller updateCategory::: ");
 
         CategoryResponseDTO response = categoryService.updateCategory(category);
-        if (response != null && Objects.nonNull(response)) {
+        if (response != null) {
             return new ResponseEntity<>(response, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -90,7 +87,7 @@ public class CategoryController {
         logger.info(" ::: Category Controller blockCategory::: ");
 
         CategoryResponseDTO response = categoryService.blockCategory(category);
-        if (response != null && Objects.nonNull(response)) {
+        if (response != null) {
             return new ResponseEntity<>(response, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

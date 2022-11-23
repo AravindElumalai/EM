@@ -3,7 +3,6 @@ package com.expensemanager.businesslogic;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -182,10 +181,11 @@ public class SubCategoryLogic implements SubCategoryAbstract {
         String subCategoryId = "";
         try {
             SubCategory getSubCategoryId = subCategoryRepo.findTopByOrderBySubCreatedDateDesc();
+            logger.info("::: SubCategory ID:::" + getSubCategoryId.getSubCategoryId());
             if (Objects.isNull(getSubCategoryId)) {
                 subCategoryId = SubCategoryConstant.SUB_CATEGORY_ID_PREFIX + 1;
             } else {
-                Integer val = Integer.parseInt(subCategoryId.substring(3));
+                Integer val = Integer.parseInt(getSubCategoryId.getSubCategoryId().substring(6));
                 logger.info(" ::: Val :::", val);
                 Integer finalVal = val + 1;
                 subCategoryId = SubCategoryConstant.SUB_CATEGORY_ID_PREFIX + finalVal;
