@@ -1,6 +1,7 @@
 package com.expensemanager.businesslogic;
 
 import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -39,8 +40,8 @@ public class IncomeLogic implements IncomeAbstract {
             Income addObj = Income.builder().incomeId(generateIncomeId()).incomeName(request.getIncomeName())
                     .subCategory(subCatRepo.findBySubCategoryId(request.getSubCategoryId())).amount(request.getAmount())
                     .comment(request.getComment()).incomeReceivedDate(new Date())
-                    .incomeMonth(getMonthFromDate(new Date().toString()))
-                    .incomeYear(getYearFromDate(new Date().toString())).build();
+                    .incomeMonth(getMonthFromDate(new Date()))
+                    .incomeYear(getYearFromDate(new Date())).build();
             addObj = incomeRepo.saveAndFlush(addObj);
             return generateResponse(addObj);
 
@@ -102,7 +103,7 @@ public class IncomeLogic implements IncomeAbstract {
         logger.info("::: IncomeLogic ::: getEntryCurrentMonthAndYear ::::");
         try {
             List<Income> getCurrentMonthIncomeList = incomeRepo.findByIncomeMonthAndIncomeYear(
-                    getMonthFromDate(new Date().toString()), getYearFromDate(new Date().toString()));
+                    getMonthFromDate(new Date()), getYearFromDate(new Date()));
             if (!getCurrentMonthIncomeList.isEmpty()) {
                 return getCurrentMonthIncomeList.stream().map(currentObj -> generateResponse(currentObj))
                         .collect(Collectors.toList());
@@ -190,7 +191,7 @@ public class IncomeLogic implements IncomeAbstract {
     }
 
     @Override
-    public List<IncomeResponseDto> getEntryForMonth(String month) throws IncomeExpection {
+    public List<IncomeResponseDto> getEntryForMonth(int month) throws IncomeExpection {
         logger.info("::: IncomeLogic ::: getEntryForMonth ::::");
         try {
             List<Income> getIncomeList = incomeRepo.findByIncomeMonth(month);
@@ -212,10 +213,12 @@ public class IncomeLogic implements IncomeAbstract {
         String incomeId = "";
         try {
             Income incomeObj = incomeRepo.findTopByOrderByIncomeReceivedDateDesc();
-            logger.info(" ::: Income ID :::" + incomeObj.getIncomeId());
+            // logger.info(" ::: Income ID :::" + incomeObj.getIncomeId());
             if (Objects.isNull(incomeObj)) {
                 logger.info(" ::: Object is Null :::");
+                logger.info(" ::: IncomeConstant.INCOME_PREFIX :::" + IncomeConstant.INCOME_PREFIX);
                 incomeId = IncomeConstant.INCOME_PREFIX + 1;
+                logger.info(" ::: Income Iddd :::" + incomeId);
             } else {
                 logger.info(" ::: Object is Not Null :::");
                 String existingId = incomeObj.getIncomeId();
@@ -224,6 +227,7 @@ public class IncomeLogic implements IncomeAbstract {
                 Integer finalVal = val + 1;
                 incomeId = IncomeConstant.INCOME_PREFIX + finalVal;
             }
+            logger.info(" ::: incomeId :::" + incomeId);
             return incomeId;
         } catch (Exception e) {
             throw new IncomeExpection("Expection occured in generateIncomeId" + e.getMessage());
@@ -231,18 +235,21 @@ public class IncomeLogic implements IncomeAbstract {
 
     }
 
-    private String getMonthFromDate(String date) {
+    private int getMonthFromDate(Date date) {
         logger.info("::: getMonthFromDate :::");
-        LocalDate currentDate = LocalDate.parse(date);
-        String month = currentDate.getMonth().toString();
+        logger.info("::: getMonthFromDate :::" + date);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        int month = calendar.get(Calendar.MONTH) + 1;
         logger.info("::: Month :::" + month);
         return month;
     }
 
-    private int getYearFromDate(String date) {
+    private int getYearFromDate(Date date) {
         logger.info("::: getYearFromDate :::");
-        LocalDate currentDate = LocalDate.parse(date);
-        int year = currentDate.getYear();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        int year = calendar.get(Calendar.YEAR);
         logger.info("::: year :::" + year);
         return year;
     }

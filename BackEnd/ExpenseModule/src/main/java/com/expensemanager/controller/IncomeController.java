@@ -63,8 +63,8 @@ public class IncomeController {
     }
 
     @GetMapping(value = "/getCurrentMonthExpense")
-    public ResponseEntity<List<IncomeResponseDto>> currentMonthExpense() {
-        logger.info(" ::: IncomeController ::: currentMonthExpense :::");
+    public ResponseEntity<List<IncomeResponseDto>> currentMonthIncome() {
+        logger.info(" ::: IncomeController ::: currentMonthIncome :::");
         List<IncomeResponseDto> response = incomeAbstract.getEntryCurrentMonthAndYear();
         if (response.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -75,8 +75,8 @@ public class IncomeController {
     }
 
     @GetMapping(value = "/getBetweenDate")
-    public ResponseEntity<List<IncomeResponseDto>> currentExpenseBetweenDate(@RequestBody IncomeRequestDto entity) {
-        logger.info(" ::: IncomeController ::: currentExpenseBetweenDate :::");
+    public ResponseEntity<List<IncomeResponseDto>> currentIncomeBetweenDate(@RequestBody IncomeRequestDto entity) {
+        logger.info(" ::: IncomeController ::: currentIncomeBetweenDate :::");
         List<IncomeResponseDto> response = incomeAbstract.getEntryBetweenStartAndEndDate(entity);
         if (response.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -87,8 +87,8 @@ public class IncomeController {
     }
 
     @GetMapping(value = "/getExpense/{incomeId}")
-    public ResponseEntity<IncomeResponseDto> getExpenseById(@PathVariable String incomeId) {
-        logger.info(" ::: IncomeController ::: getExpenseById :::");
+    public ResponseEntity<IncomeResponseDto> getIncomeById(@PathVariable String incomeId) {
+        logger.info(" ::: IncomeController ::: getIncomeById :::");
         IncomeResponseDto response = incomeAbstract.getOneIncomeById(incomeId);
         if (Objects.nonNull(response)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -98,9 +98,9 @@ public class IncomeController {
         }
     }
 
-    @GetMapping(value = "/getBetweenTwoDate")
-    public ResponseEntity<List<IncomeResponseDto>> expenseBetweenTwoDate(@RequestBody IncomeRequestDto entity) {
-        logger.info(" ::: IncomeController ::: expenseBetweenTwoDate :::");
+    @GetMapping(value = "/getMonthAndYear")
+    public ResponseEntity<List<IncomeResponseDto>> incomeBetweenMonthAndYear(@RequestBody IncomeRequestDto entity) {
+        logger.info(" ::: IncomeController ::: incomeBetweenMonthAndYear :::");
         List<IncomeResponseDto> response = incomeAbstract.getEntryBetweenMonthAndYear(entity);
         if (response.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -111,8 +111,8 @@ public class IncomeController {
     }
 
     @GetMapping(value = "/getYear/{year}")
-    public ResponseEntity<List<IncomeResponseDto>> expenseInYear(@PathVariable int year) {
-        logger.info(" ::: IncomeController ::: expenseInYear :::");
+    public ResponseEntity<List<IncomeResponseDto>> incomeInYear(@PathVariable int year) {
+        logger.info(" ::: IncomeController ::: incomeInYear :::");
         List<IncomeResponseDto> response = incomeAbstract.getEntryForYear(year);
         if (response.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -123,8 +123,8 @@ public class IncomeController {
     }
 
     @GetMapping(value = "/getMonth/{month}")
-    public ResponseEntity<List<IncomeResponseDto>> expenseInMonth(@PathVariable String month) {
-        logger.info(" ::: IncomeController ::: expenseInMonth :::");
+    public ResponseEntity<List<IncomeResponseDto>> incomeInMonth(@PathVariable int month) {
+        logger.info(" ::: IncomeController ::: incomeInMonth :::");
         List<IncomeResponseDto> response = incomeAbstract.getEntryForMonth(month);
         if (response.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

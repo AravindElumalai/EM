@@ -44,4 +44,6 @@ public class SubCategory {
     @OneToMany(mappedBy = "subCategory")
     private List<Income> income;
 
+    @OneToMany(mappedBy = "subCategory")
+    private List<Expense> expense;
 }

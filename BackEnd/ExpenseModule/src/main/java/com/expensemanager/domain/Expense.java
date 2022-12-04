@@ -20,19 +20,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "income_table")
+@Table(name = "expense_table")
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Data
-public class Income {
+public class Expense {
 
     @Id
-    @Column(name = "income_id")
-    private String incomeId;
+    @Column(name = "expense_id")
+    private String expenseId;
 
-    @Column(name = "income_name")
-    private String incomeName;
+    @Column(name = "expense_name")
+    private String expenseName;
 
     @ManyToOne
     @JoinColumn(name = "sub_category_id")
@@ -41,17 +41,21 @@ public class Income {
     @Column(name = "date")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date incomeReceivedDate;
+    private Date expenseReceivedDate;
 
     @Column(name = "amount")
     private BigDecimal amount;
 
+    @Column(name = "payment_mode")
+    private String paymentMode;
+
     @Column(name = "comment")
-    private String comment;
+    private String expenseComment;
 
     @Column(name = "month")
-    private int incomeMonth;
+    private int expenseMonth;
 
     @Column(name = "year")
-    private int incomeYear;
+    private int expenseYear;
+
 }

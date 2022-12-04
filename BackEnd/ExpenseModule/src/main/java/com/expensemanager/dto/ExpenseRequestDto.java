@@ -14,28 +14,31 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class IncomeRequestDto {
+public class ExpenseRequestDto {
 
-    private String incomeId;
+    private String expenseId;
 
-    private String incomeName;
+    private String expenseName;
 
     private String subCategoryId;
-
-    private BigDecimal amount;
-
-    private String comment;
-
-    private int month;
-
-    private int year;
-
-    private Date modifyDate;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date startDate;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date endDate;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date modifyDate;
+
+    private BigDecimal amount;
+
+    private String paymentMode;
+
+    private String comment;
+
+    private int month;
+
+    private int year;
 
 }

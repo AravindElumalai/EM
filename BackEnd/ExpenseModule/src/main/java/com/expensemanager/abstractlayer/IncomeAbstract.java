@@ -28,6 +28,6 @@ public interface IncomeAbstract {
 
     public List<IncomeResponseDto> getEntryForYear(int year) throws IncomeExpection;
 
-    public List<IncomeResponseDto> getEntryForMonth(String month) throws IncomeExpection;
+    public List<IncomeResponseDto> getEntryForMonth(int month) throws IncomeExpection;
 
 }

@@ -29,7 +29,7 @@ public class IncomeResponseDto {
 
     private String comment;
 
-    private String month;
+    private int month;
 
     private int year;
 }

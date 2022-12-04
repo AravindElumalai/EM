@@ -15,11 +15,11 @@ public interface IncomeRepository extends JpaRepository<Income, String> {
 
     public Income findByIncomeId(String incomeId);
 
-    public List<Income> findByIncomeMonthAndIncomeYear(String month, int year);
+    public List<Income> findByIncomeMonthAndIncomeYear(int month, int year);
 
     public List<Income> findByIncomeReceivedDateBetween(Date startDate, Date endDate);
 
     public List<Income> findByIncomeYear(int year);
 
-    public List<Income> findByIncomeMonth(String month);
+    public List<Income> findByIncomeMonth(int month);
 }
